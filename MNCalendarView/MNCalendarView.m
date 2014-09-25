@@ -24,6 +24,7 @@
 @property(nonatomic,assign,readwrite) NSUInteger daysInWeek;
 
 @property(nonatomic,strong,readwrite) NSDateFormatter *monthFormatter;
+@property(nonatomic,strong,readwrite) NSDateFormatter *yearFormatter;
 
 - (NSDate *)firstVisibleDateOfMonth:(NSDate *)date;
 - (NSDate *)lastVisibleDateOfMonth:(NSDate *)date;
@@ -47,7 +48,7 @@
   self.weekdayCellClass = MNCalendarViewWeekdayCell.class;
   self.dayCellClass     = MNCalendarViewDayCell.class;
   
-  _separatorColor = [UIColor colorWithRed:.85f green:.85f blue:.85f alpha:1.f];
+    _separatorColor = [UIColor whiteColor];//[UIColor colorWithRed:.85f green:.85f blue:.85f alpha:1.f];
   
   [self addSubview:self.collectionView];
   [self applyConstraints];
@@ -77,7 +78,7 @@
     _collectionView =
       [[UICollectionView alloc] initWithFrame:CGRectZero
                          collectionViewLayout:layout];
-    _collectionView.backgroundColor = [UIColor colorWithRed:.96f green:.96f blue:.96f alpha:1.f];
+      _collectionView.backgroundColor = [UIColor whiteColor];//[UIColor colorWithRed:.96f green:.96f blue:.96f alpha:1.f];
     _collectionView.translatesAutoresizingMaskIntoConstraints = NO;
     _collectionView.showsHorizontalScrollIndicator = NO;
     _collectionView.showsVerticalScrollIndicator = NO;
@@ -98,7 +99,11 @@
   
   self.monthFormatter = [[NSDateFormatter alloc] init];
   self.monthFormatter.calendar = calendar;
-  [self.monthFormatter setDateFormat:@"MMMM yyyy"];
+  [self.monthFormatter setDateFormat:@"MMMM"];
+    
+    self.yearFormatter = [[NSDateFormatter alloc] init];
+    self.yearFormatter.calendar = calendar;
+    [self.yearFormatter setDateFormat:@"yyyy"];
 }
 
 - (void)setSelectedDate:(NSDate *)selectedDate {
@@ -213,6 +218,7 @@
 
   headerView.backgroundColor = self.collectionView.backgroundColor;
   headerView.titleLabel.text = [self.monthFormatter stringFromDate:self.monthDates[indexPath.section]];
+    headerView.titleYearLabel.text = [self.yearFormatter stringFromDate:self.monthDates[indexPath.section]];
 
   return headerView;
 }

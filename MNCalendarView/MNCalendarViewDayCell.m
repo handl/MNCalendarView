@@ -7,6 +7,7 @@
 //
 
 #import "MNCalendarViewDayCell.h"
+#import "UIColor+HexString.h"
 
 NSString *const MNCalendarViewDayCellIdentifier = @"MNCalendarViewDayCellIdentifier";
 
@@ -39,18 +40,36 @@ NSString *const MNCalendarViewDayCellIdentifier = @"MNCalendarViewDayCellIdentif
   self.weekday = components.weekday;
   self.titleLabel.text = [NSString stringWithFormat:@"%d", components.day];
   self.enabled = monthComponents.month == components.month;
+    
+    if ([self isToday]){
+        self.titleLabel.textColor = [UIColor colorWithHexString:@"59c7f1"];
+        self.titleLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+    }else{
+        self.titleLabel.textColor = self.enabled ? [UIColor colorWithHexString:@"808080"] : [UIColor colorWithHexString:@"eaeaea"];
+    }
+    
+
   
   [self setNeedsDisplay];
 }
 
+
+-(BOOL) isToday{
+    
+    NSCalendarUnit unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSDateComponents *cellDateComps =  [self.calendar components:unitFlags fromDate:self.date];
+    NSDateComponents *todayDateComps =  [self.calendar components:unitFlags fromDate:[NSDate date]];
+    
+    return [cellDateComps day] == [todayDateComps day] && [cellDateComps month] == [todayDateComps month] && [cellDateComps year] == [todayDateComps year];
+
+}
+
+
 - (void)setEnabled:(BOOL)enabled {
   [super setEnabled:enabled];
   
-  self.titleLabel.textColor =
-  self.enabled ? UIColor.darkTextColor : UIColor.lightGrayColor;
-  
-  self.backgroundColor =
-  self.enabled ? UIColor.whiteColor : [UIColor colorWithRed:.96f green:.96f blue:.96f alpha:1.f];
+    self.backgroundColor = UIColor.whiteColor;
+  //self.enabled ? UIColor.whiteColor : [UIColor colorWithRed:.96f green:.96f blue:.96f alpha:1.f];
 }
 
 - (void)drawRect:(CGRect)rect {

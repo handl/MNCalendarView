@@ -13,6 +13,7 @@ NSString *const MNCalendarHeaderViewIdentifier = @"MNCalendarHeaderViewIdentifie
 @interface MNCalendarHeaderView()
 
 @property(nonatomic,strong,readwrite) UILabel *titleLabel;
+@property(nonatomic,strong,readwrite) UILabel *titleYearLabel;
 
 @end
 
@@ -20,13 +21,25 @@ NSString *const MNCalendarHeaderViewIdentifier = @"MNCalendarHeaderViewIdentifie
 
 - (id)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
-    self.titleLabel = [[UILabel alloc] initWithFrame:self.bounds];
-    self.titleLabel.backgroundColor = UIColor.clearColor;
-    self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-    self.titleLabel.font = [UIFont systemFontOfSize:16.f];
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+      CGRect labelBounds = self.bounds;
+      labelBounds.origin.x = 16.0f;
+      
+        self.titleLabel = [[UILabel alloc] initWithFrame:labelBounds];
+        self.titleLabel.backgroundColor = [UIColor whiteColor];
+        self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        self.titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
+        self.titleLabel.textAlignment = NSTextAlignmentLeft;
+          
+        [self addSubview:self.titleLabel];
 
-    [self addSubview:self.titleLabel];
+        labelBounds.origin.y = labelBounds.origin.y + 20.0f;
+        self.titleYearLabel = [[UILabel alloc] initWithFrame:labelBounds];
+        self.titleYearLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        self.titleYearLabel.font = [UIFont systemFontOfSize:12.0f];
+        self.titleYearLabel.textAlignment = NSTextAlignmentLeft;
+
+        [self addSubview:self.titleYearLabel];
+      
   }
   return self;
 }
