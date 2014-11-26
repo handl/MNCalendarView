@@ -40,13 +40,20 @@ NSString *const MNCalendarViewDayCellIdentifier = @"MNCalendarViewDayCellIdentif
   self.weekday = components.weekday;
   self.titleLabel.text = [NSString stringWithFormat:@"%d", components.day];
   self.enabled = monthComponents.month == components.month;
-
+    
+   
     if ([self isToday]){
         self.titleLabel.textColor = [UIColor colorWithHexString:@"75d6e0"];
         self.titleLabel.font = [UIFont boldSystemFontOfSize:14.0f];
+
     }else{
         self.titleLabel.textColor = self.enabled ? [UIColor colorWithHexString:@"353535"] : [UIColor colorWithHexString:@"ededed"];
     }
+    
+    if (self.defaultFontFamilyName){
+        self.titleLabel.font = [UIFont fontWithName:self.defaultFontFamilyName size:14.0f];
+    }
+
     
 
   

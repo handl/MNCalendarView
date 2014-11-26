@@ -219,6 +219,7 @@
   headerView.backgroundColor = self.collectionView.backgroundColor;
   headerView.titleLabel.text = [self.monthFormatter stringFromDate:self.monthDates[indexPath.section]];
     headerView.titleYearLabel.text = [self.yearFormatter stringFromDate:self.monthDates[indexPath.section]];
+    headerView.defaultFontFamilyName = self.defaultFontFamilyName;
 
   return headerView;
 }
@@ -246,12 +247,14 @@
     cell.backgroundColor = self.collectionView.backgroundColor;
     cell.titleLabel.text = self.weekdaySymbols[indexPath.item];
     cell.separatorColor = self.separatorColor;
+    cell.defaultFontFamilyName = self.defaultFontFamilyName;
     return cell;
   }
   MNCalendarViewDayCell *cell =
     [collectionView dequeueReusableCellWithReuseIdentifier:MNCalendarViewDayCellIdentifier
                                               forIndexPath:indexPath];
   cell.separatorColor = self.separatorColor;
+    cell.defaultFontFamilyName = self.defaultFontFamilyName;
   
   NSDate *monthDate = self.monthDates[indexPath.section];
   NSDate *firstDateInMonth = [self firstVisibleDateOfMonth:monthDate];

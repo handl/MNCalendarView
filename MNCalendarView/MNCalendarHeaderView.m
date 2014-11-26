@@ -28,6 +28,7 @@ NSString *const MNCalendarHeaderViewIdentifier = @"MNCalendarHeaderViewIdentifie
         self.titleLabel.backgroundColor = [UIColor whiteColor];
         self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         self.titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
+
         self.titleLabel.textAlignment = NSTextAlignmentLeft;
           
         [self addSubview:self.titleLabel];
@@ -36,12 +37,25 @@ NSString *const MNCalendarHeaderViewIdentifier = @"MNCalendarHeaderViewIdentifie
         self.titleYearLabel = [[UILabel alloc] initWithFrame:labelBounds];
         self.titleYearLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         self.titleYearLabel.font = [UIFont systemFontOfSize:12.0f];
+
         self.titleYearLabel.textAlignment = NSTextAlignmentLeft;
 
         [self addSubview:self.titleYearLabel];
       
   }
   return self;
+}
+
+-(void) layoutSubviews{
+    [super layoutSubviews];
+    
+    if (self.defaultFontFamilyName){
+        self.titleYearLabel.font = [UIFont fontWithName:self.defaultFontFamilyName size:12.0f];
+    }
+    
+    if (self.defaultFontFamilyName){
+        self.titleLabel.font = [UIFont fontWithName:self.defaultFontFamilyName size:18.0f];
+    }
 }
 
 - (void)setDate:(NSDate *)date {

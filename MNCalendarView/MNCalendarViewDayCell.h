@@ -15,6 +15,8 @@ extern NSString *const MNCalendarViewDayCellIdentifier;
 @property(nonatomic,strong,readonly) NSDate *date;
 @property(nonatomic,strong,readonly) NSDate *month;
 
+@property (nonatomic, strong) NSString *defaultFontFamilyName;
+
 - (void)setDate:(NSDate *)date
           month:(NSDate *)month
        calendar:(NSCalendar *)calendar;
