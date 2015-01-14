@@ -15,5 +15,6 @@ extern NSString *const MNCalendarViewWeekdayCellIdentifier;
 @property(nonatomic,assign) NSUInteger weekday;
 
 @property (nonatomic, strong) NSString *defaultFontFamilyName;
+@property (nonatomic, strong) UIColor *defaultColor;
 
 @end

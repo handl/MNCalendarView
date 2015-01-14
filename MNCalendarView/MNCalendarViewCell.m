@@ -37,7 +37,7 @@ NSString *const MNCalendarViewCellIdentifier = @"MNCalendarViewCellIdentifier";
     self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     self.titleLabel.font = [UIFont systemFontOfSize:14.f];
     self.titleLabel.textColor = [UIColor darkTextColor];
-    self.titleLabel.highlightedTextColor = [UIColor lightGrayColor];
+    self.titleLabel.highlightedTextColor = [UIColor blueColor];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.userInteractionEnabled = NO;
     self.titleLabel.backgroundColor = [UIColor clearColor];
@@ -56,6 +56,10 @@ NSString *const MNCalendarViewCellIdentifier = @"MNCalendarViewCellIdentifier";
   
   self.contentView.frame = self.bounds;
   self.selectedBackgroundView.frame = self.bounds;
+    
+    if (self.highlightedColor){
+        self.titleLabel.highlightedTextColor = self.highlightedColor;
+    }
 }
 
 - (void)drawRect:(CGRect)rect {

@@ -217,9 +217,12 @@
                                               forIndexPath:indexPath];
 
   headerView.backgroundColor = self.collectionView.backgroundColor;
-  headerView.titleLabel.text = [self.monthFormatter stringFromDate:self.monthDates[indexPath.section]];
-    headerView.titleYearLabel.text = [self.yearFormatter stringFromDate:self.monthDates[indexPath.section]];
+  headerView.titleLabel.text = [[self.monthFormatter stringFromDate:self.monthDates[indexPath.section]] uppercaseString];
+    headerView.titleYearLabel.text = [[self.yearFormatter stringFromDate:self.monthDates[indexPath.section]] uppercaseString];
     headerView.defaultFontFamilyName = self.defaultFontFamilyName;
+    headerView.defaultBoldFontFamilyName = self.defaultBoldFontFamilyName;
+    headerView.defaultLightFontFamilyName = self.defaultLightFontFamilyName;
+    headerView.defaultColor = self.defaultColorHeader;
 
   return headerView;
 }
@@ -236,40 +239,42 @@
   return self.daysInWeek + components.day + 1;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
-                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
+  // weekday header
   if (indexPath.item < self.daysInWeek) {
     MNCalendarViewWeekdayCell *cell =
       [collectionView dequeueReusableCellWithReuseIdentifier:MNCalendarViewWeekdayCellIdentifier
                                                 forIndexPath:indexPath];
     
     cell.backgroundColor = self.collectionView.backgroundColor;
-    cell.titleLabel.text = self.weekdaySymbols[indexPath.item];
+    cell.titleLabel.text = [self.weekdaySymbols[indexPath.item] uppercaseString];
     cell.separatorColor = self.separatorColor;
     cell.defaultFontFamilyName = self.defaultFontFamilyName;
+      cell.defaultColor = self.defaultColorWeekDay;
     return cell;
   }
-  MNCalendarViewDayCell *cell =
-    [collectionView dequeueReusableCellWithReuseIdentifier:MNCalendarViewDayCellIdentifier
-                                              forIndexPath:indexPath];
-  cell.separatorColor = self.separatorColor;
+    
+    
+  // day cell
+  MNCalendarViewDayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MNCalendarViewDayCellIdentifier forIndexPath:indexPath];
+    cell.separatorColor = self.separatorColor;
     cell.defaultFontFamilyName = self.defaultFontFamilyName;
+    cell.defaultBoldFontFamilyName = self.defaultBoldFontFamilyName;
+    cell.defaultInactiveColor = self.defaultColorDate;
+    cell.defaultActiveColor = self.defaultColorActiveDate;
+    cell.highlightedColor = self.defaultColorCurrentDate;
+    
   
   NSDate *monthDate = self.monthDates[indexPath.section];
   NSDate *firstDateInMonth = [self firstVisibleDateOfMonth:monthDate];
-
   NSUInteger day = indexPath.item - self.daysInWeek;
   
-  NSDateComponents *components =
-    [self.calendar components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit
-                     fromDate:firstDateInMonth];
+  NSDateComponents *components = [self.calendar components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit fromDate:firstDateInMonth];
   components.day += day;
   
   NSDate *date = [self.calendar dateFromComponents:components];
-  [cell setDate:date
-          month:monthDate
-       calendar:self.calendar];
+  [cell setDate:date month:monthDate calendar:self.calendar];
   
   if (cell.enabled) {
     [cell setEnabled:[self dateEnabled:date]];

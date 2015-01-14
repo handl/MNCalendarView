@@ -28,6 +28,13 @@
 @property(nonatomic,copy)   NSDate     *selectedDate;
 
 @property (nonatomic, strong) NSString *defaultFontFamilyName;
+@property (nonatomic, strong) NSString *defaultBoldFontFamilyName;
+@property (nonatomic, strong) NSString *defaultLightFontFamilyName;
+@property (nonatomic, strong) UIColor *defaultColorHeader;
+@property (nonatomic, strong) UIColor *defaultColorWeekDay;
+@property (nonatomic, strong) UIColor *defaultColorDate;
+@property (nonatomic, strong) UIColor *defaultColorCurrentDate;
+@property (nonatomic, strong) UIColor *defaultColorActiveDate;
 
 @property(nonatomic,strong) UIColor *separatorColor UI_APPEARANCE_SELECTOR; // default is the standard separator gray
 

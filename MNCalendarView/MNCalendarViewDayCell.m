@@ -43,7 +43,7 @@ NSString *const MNCalendarViewDayCellIdentifier = @"MNCalendarViewDayCellIdentif
     
    
     if ([self isToday]){
-        self.titleLabel.textColor = [UIColor colorWithHexString:@"75d6e0"];
+        self.titleLabel.textColor =[UIColor colorWithHexString:@"75d6e0"];
         self.titleLabel.font = [UIFont boldSystemFontOfSize:14.0f];
 
     }else{
@@ -53,13 +53,23 @@ NSString *const MNCalendarViewDayCellIdentifier = @"MNCalendarViewDayCellIdentif
     if (self.defaultFontFamilyName){
         self.titleLabel.font = [UIFont fontWithName:self.defaultFontFamilyName size:14.0f];
     }
-
     
+    [self applyDefaultColors];
 
-  
   [self setNeedsDisplay];
 }
 
+
+-(void) applyDefaultColors{
+    
+    self.titleLabel.textColor = self.enabled ? self.defaultActiveColor : self.defaultInactiveColor;
+
+}
+
+-(void) layoutSubviews{
+    [super layoutSubviews];
+    [self applyDefaultColors];
+}
 
 -(BOOL) isToday{
     

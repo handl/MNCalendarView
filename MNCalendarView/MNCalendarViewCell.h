@@ -20,4 +20,7 @@ CG_EXTERN void MNContextDrawLine(CGContextRef c, CGPoint start, CGPoint end, CGC
 
 @property(nonatomic,strong,readonly) UILabel *titleLabel;
 
+@property(nonatomic,strong) UIColor *highlightedColor;
+
+
 @end

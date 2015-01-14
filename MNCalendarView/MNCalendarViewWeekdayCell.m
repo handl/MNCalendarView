@@ -27,7 +27,11 @@ NSString *const MNCalendarViewWeekdayCellIdentifier = @"MNCalendarViewWeekdayCel
     [super layoutSubviews];
     
     if (self.defaultFontFamilyName){
-        self.titleLabel.font = [UIFont fontWithName:self.defaultFontFamilyName size:12.0f];
+        self.titleLabel.font = [UIFont fontWithName:self.defaultFontFamilyName size:9.0f];
+    }
+    
+    if (self.defaultColor){
+        self.titleLabel.textColor = self.defaultColor;
     }
 }
 

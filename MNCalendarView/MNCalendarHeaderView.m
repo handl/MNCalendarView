@@ -49,12 +49,17 @@ NSString *const MNCalendarHeaderViewIdentifier = @"MNCalendarHeaderViewIdentifie
 -(void) layoutSubviews{
     [super layoutSubviews];
     
-    if (self.defaultFontFamilyName){
-        self.titleYearLabel.font = [UIFont fontWithName:self.defaultFontFamilyName size:12.0f];
+    if (self.defaultLightFontFamilyName){
+        self.titleYearLabel.font = [UIFont fontWithName:self.defaultLightFontFamilyName size:12.0f];
     }
     
-    if (self.defaultFontFamilyName){
-        self.titleLabel.font = [UIFont fontWithName:self.defaultFontFamilyName size:18.0f];
+    if (self.defaultBoldFontFamilyName){
+        self.titleLabel.font = [UIFont fontWithName:self.defaultBoldFontFamilyName size:18.0f];
+    }
+    
+    if (self.defaultColor){
+        self.titleLabel.textColor = self.defaultColor;
+        self.titleYearLabel.textColor = self.defaultColor;
     }
 }
 

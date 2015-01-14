@@ -16,5 +16,8 @@ extern NSString *const MNCalendarHeaderViewIdentifier;
 @property(nonatomic,strong,readonly) UILabel *titleYearLabel;
 @property(nonatomic,strong) NSDate *date;
 @property (nonatomic, strong) NSString *defaultFontFamilyName;
+@property (nonatomic, strong) NSString *defaultBoldFontFamilyName;
+@property (nonatomic, strong) NSString *defaultLightFontFamilyName;
+@property (nonatomic, strong) UIColor *defaultColor;
 
 @end
